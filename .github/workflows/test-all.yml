@@ -1,0 +1,17 @@
+name: test-friendlycv
+on: [push]
+jobs:
+  test-all:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: ['1.23']
+    name: Go ${{ matrix.go }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go }}
+      - name: Run test
+        run: go test -v
